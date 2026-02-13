@@ -3,7 +3,7 @@ def checkmate(board):
         print("ไม่มีตารางหมากรุก")
         return
 
-    rows = board.splitlines()
+    rows = [list(row) for row in board.splitlines()]
     n = len(rows)
 
     if any(len(row) != n for row in rows):
@@ -11,11 +11,10 @@ def checkmate(board):
         return
     valid_pieces_name = {"K", "Q", "R", "P", "B", "."}
 
-    for row in rows:
-        for ch in row:
-            if ch not in valid_pieces_name:
-                print("ตัวอักษรไม่ถูกต้อง")
-                return
+    for row in range(n):
+        for col in range(n):
+            if rows[row][col] not in valid_pieces_name:
+               rows[row][col] = "."
 
     king_positions = []
 
